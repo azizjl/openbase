@@ -1,0 +1,52 @@
+export const projects = [
+  {
+    id: "proj-1",
+    name: "AI Agent Platform v2",
+    description: "Multi-agent orchestration with enterprise features",
+    progress: 72,
+    status: "active",
+    team: ["AR", "JK", "SC", "ML"],
+    lastUpdated: "2 hours ago",
+    tasksCount: 24,
+    completedTasks: 17,
+  },
+  {
+    id: "proj-2",
+    name: "RAG Document Pipeline",
+    description: "Document indexing, search, and citation-backed answers",
+    progress: 45,
+    status: "active",
+    team: ["JK", "SC"],
+    lastUpdated: "Yesterday",
+    tasksCount: 18,
+    completedTasks: 8,
+  },
+  {
+    id: "proj-3",
+    name: "Enterprise Analytics",
+    description: "Usage metrics, cost tracking, and team insights",
+    progress: 30,
+    status: "active",
+    team: ["AR", "ML"],
+    lastUpdated: "3 days ago",
+    tasksCount: 12,
+    completedTasks: 4,
+  },
+  {
+    id: "proj-4",
+    name: "Customer Portal Redesign",
+    description: "Modern self-service portal for enterprise clients",
+    progress: 100,
+    status: "completed",
+    team: ["ML", "SC"],
+    lastUpdated: "Last week",
+    tasksCount: 32,
+    completedTasks: 32,
+  },
+]
+
+export const recentUpdates = [
+  { project: "AI Agent Platform v2", update: "SSO integration merged", time: "2h ago" },
+  { project: "RAG Document Pipeline", update: "Upload API spec approved", time: "1d ago" },
+  { project: "Enterprise Analytics", update: "Chart components added", time: "3d ago" },
+]
