@@ -7,7 +7,7 @@ import {
   LayoutDashboard,
   MessageSquare,
   MessagesSquare,
-  Sparkles,
+  Eye,
 } from "lucide-react"
 import {
   Sidebar,
@@ -30,7 +30,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { UserAvatar } from "@/components/shared/UserAvatar"
 import { currentUser, workspaces } from "@/data/user"
 
 const navItems = [
@@ -55,7 +55,7 @@ export function AppSidebar() {
                 render={
                   <SidebarMenuButton size="lg" className="data-open:bg-sidebar-accent">
                     <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <Sparkles />
+                      <Eye />
                     </div>
                     <div className="flex flex-col gap-0.5 leading-none">
                       <span className="font-medium">OpenBase</span>
@@ -111,9 +111,11 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg">
-              <Avatar className="size-8">
-                <AvatarFallback>{currentUser.initials}</AvatarFallback>
-              </Avatar>
+              <UserAvatar
+                initials={currentUser.initials}
+                src={currentUser.avatar}
+                className="size-8"
+              />
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-medium">{currentUser.name}</span>
                 <span className="text-xs text-muted-foreground">{currentUser.role}</span>

@@ -5,11 +5,19 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageHeader } from "@/components/dashboard/PageHeader"
 import { SearchInput } from "@/components/dashboard/SearchInput"
 import { ProjectCard } from "@/components/projects/ProjectCard"
+import { ProjectDetailDialog } from "@/components/projects/ProjectDetailDialog"
 import { DashboardCard } from "@/components/dashboard/DashboardCard"
 import { projects, recentUpdates } from "@/data/projects"
 
 export function ProjectsPage() {
   const [view, setView] = useState("grid")
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project)
+    setDialogOpen(true)
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -40,7 +48,11 @@ export function ProjectsPage() {
         <div className="lg:col-span-2">
           <div className="grid gap-4 sm:grid-cols-2">
             {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={() => handleProjectClick(project)}
+              />
             ))}
           </div>
         </div>
@@ -57,6 +69,12 @@ export function ProjectsPage() {
           </div>
         </DashboardCard>
       </div>
+
+      <ProjectDetailDialog
+        project={selectedProject}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+      />
     </div>
   )
 }

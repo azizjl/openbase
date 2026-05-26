@@ -42,6 +42,6 @@ export const chatMessages = [
     content:
       "Based on your Q1 roadmap, here are the top 3 priorities:\n\n1. **AI Agent Platform v2** — Launch multi-agent orchestration with enterprise SSO and audit logs.\n\n2. **RAG Document Pipeline** — Ship document indexing, semantic search, and citation-backed answers.\n\n3. **Enterprise Analytics Dashboard** — Usage metrics, cost tracking, and team-level insights.\n\nWould you like me to break down timelines or dependencies for any of these?",
     timestamp: "10:32 AM",
-    agent: "Nova",
+    agent: "OpenBase AI",
   },
 ]

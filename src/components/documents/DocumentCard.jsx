@@ -16,11 +16,17 @@ const statusVariants = {
   failed: "destructive",
 }
 
-export function DocumentCard({ document }) {
+export function DocumentCard({ document, onClick }) {
   const Icon = fileIcons[document.type] || File
 
   return (
-    <Card size="sm" className="transition-colors hover:ring-foreground/20">
+    <Card
+      size="sm"
+      className={cn(
+        "cursor-pointer transition-all hover:ring-foreground/20 hover:-translate-y-0.5"
+      )}
+      onClick={onClick}
+    >
       <CardContent className="flex items-start gap-3">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
           <Icon />

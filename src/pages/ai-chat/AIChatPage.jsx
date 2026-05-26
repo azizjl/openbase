@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Settings, Sparkles } from "lucide-react"
+import { Eye, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
@@ -12,11 +12,13 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { UserDropdown } from "@/components/layout/UserDropdown"
 import { chatMessages } from "@/data/chats"
 import { suggestedPrompts, aiAgents } from "@/data/agents"
+import { chatContexts } from "@/data/chatContexts"
 
 export function AIChatPage() {
   const [activeChat, setActiveChat] = useState("chat-1")
   const [activeAgent, setActiveAgent] = useState("agent-1")
   const [input, setInput] = useState("")
+  const [context, setContext] = useState("none")
   const [messages, setMessages] = useState(chatMessages)
   const [showChat, setShowChat] = useState(true)
 
@@ -41,6 +43,7 @@ export function AIChatPage() {
   }
 
   const agent = aiAgents.find((a) => a.id === activeAgent)
+  const selectedContext = chatContexts.find((c) => c.id === context)
 
   return (
     <div className="flex h-[calc(100svh-0px)] flex-col">
@@ -48,6 +51,11 @@ export function AIChatPage() {
         <SidebarTrigger />
         <Separator orientation="vertical" className="h-4" />
         <AIModelSelector selectedAgent={activeAgent} onSelect={setActiveAgent} />
+        {selectedContext && selectedContext.id !== "none" && (
+          <span className="hidden text-xs text-muted-foreground sm:inline">
+            · {selectedContext.label}
+          </span>
+        )}
         <div className="ml-auto flex items-center gap-2">
           <Button variant="ghost" size="icon">
             <Settings />
@@ -63,8 +71,6 @@ export function AIChatPage() {
             setActiveChat(id)
             setShowChat(true)
           }}
-          activeAgent={activeAgent}
-          onSelectAgent={setActiveAgent}
         />
 
         <div className="flex flex-1 flex-col overflow-hidden">
@@ -80,11 +86,11 @@ export function AIChatPage() {
             <div className="flex flex-1 flex-col items-center justify-center gap-8 p-8">
               <div className="flex flex-col items-center gap-4 text-center">
                 <div className="flex size-16 items-center justify-center rounded-2xl bg-primary/10">
-                  <Sparkles className="size-8 text-primary" />
+                  <Eye className="size-8 text-primary" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <h2 className="font-heading text-2xl font-semibold">
-                    How can {agent?.name} help you today?
+                    How can OpenBase AI help you today?
                   </h2>
                   <p className="max-w-md text-sm text-muted-foreground">
                     {agent?.description}. Ask anything about your workspace, documents, or projects.
@@ -107,7 +113,9 @@ export function AIChatPage() {
             value={input}
             onChange={setInput}
             onSend={handleSend}
-            placeholder={`Message ${agent?.name || "Nova"}...`}
+            context={context}
+            onContextChange={setContext}
+            placeholder="Message OpenBase AI..."
           />
         </div>
       </div>

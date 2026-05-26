@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Sparkles } from "lucide-react"
+import { Eye } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -26,7 +26,7 @@ export function LoginPage() {
         <div className="absolute bottom-0 right-0 size-96 rounded-full bg-indigo-600/10 blur-3xl" />
         <div className="relative flex items-center gap-2">
           <div className="flex size-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur">
-            <Sparkles />
+            <Eye />
           </div>
           <span className="font-heading text-xl font-semibold">OpenBase</span>
         </div>
@@ -48,7 +48,7 @@ export function LoginPage() {
           <CardHeader>
             <div className="flex items-center gap-2 lg:hidden">
               <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Sparkles />
+                <Eye />
               </div>
               <span className="font-heading font-semibold">OpenBase</span>
             </div>

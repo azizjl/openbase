@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { LogOut, Settings, User } from "lucide-react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { UserAvatar } from "@/components/shared/UserAvatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,9 +19,11 @@ export function UserDropdown() {
       <DropdownMenuTrigger
         render={
           <Button variant="ghost" size="icon" className="rounded-full">
-            <Avatar className="size-8">
-              <AvatarFallback>{currentUser.initials}</AvatarFallback>
-            </Avatar>
+            <UserAvatar
+              initials={currentUser.initials}
+              src={currentUser.avatar}
+              className="size-8"
+            />
           </Button>
         }
       />

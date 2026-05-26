@@ -14,6 +14,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageHeader } from "@/components/dashboard/PageHeader"
 import { SearchInput } from "@/components/dashboard/SearchInput"
 import { DocumentCard } from "@/components/documents/DocumentCard"
+import { DocumentDetailDialog } from "@/components/documents/DocumentDetailDialog"
 import { EmptyState } from "@/components/dashboard/EmptyState"
 import { documents, documentCategories } from "@/data/documents"
 
@@ -25,12 +26,19 @@ const statusVariants = {
 
 export function DocumentsPage() {
   const [category, setCategory] = useState("All")
-  const [view, setView] = useState("table")
+  const [view, setView] = useState("grid")
+  const [selectedDocument, setSelectedDocument] = useState(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const filtered =
     category === "All"
       ? documents
       : documents.filter((d) => d.category === category)
+
+  const handleDocumentClick = (doc) => {
+    setSelectedDocument(doc)
+    setDialogOpen(true)
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -76,8 +84,8 @@ export function DocumentsPage() {
           <SearchInput placeholder="Search documents..." className="w-64" />
           <Tabs value={view} onValueChange={setView}>
             <TabsList>
-              <TabsTrigger value="table">Table</TabsTrigger>
               <TabsTrigger value="grid">Grid</TabsTrigger>
+              <TabsTrigger value="table">Table</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -93,7 +101,11 @@ export function DocumentsPage() {
       ) : view === "grid" ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((doc) => (
-            <DocumentCard key={doc.id} document={doc} />
+            <DocumentCard
+              key={doc.id}
+              document={doc}
+              onClick={() => handleDocumentClick(doc)}
+            />
           ))}
         </div>
       ) : (
@@ -110,7 +122,11 @@ export function DocumentsPage() {
             </TableHeader>
             <TableBody>
               {filtered.map((doc) => (
-                <TableRow key={doc.id}>
+                <TableRow
+                  key={doc.id}
+                  className="cursor-pointer"
+                  onClick={() => handleDocumentClick(doc)}
+                >
                   <TableCell className="font-medium">{doc.name}</TableCell>
                   <TableCell>
                     <Badge variant="outline">{doc.category}</Badge>
@@ -128,6 +144,12 @@ export function DocumentsPage() {
           </Table>
         </div>
       )}
+
+      <DocumentDetailDialog
+        document={selectedDocument}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+      />
     </div>
   )
 }

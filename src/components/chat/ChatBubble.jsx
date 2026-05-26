@@ -1,5 +1,6 @@
-import { Bot, User } from "lucide-react"
+import { Bot } from "lucide-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { UserAvatar } from "@/components/shared/UserAvatar"
 import { cn } from "@/lib/utils"
 import { currentUser } from "@/data/user"
 
@@ -9,27 +10,43 @@ export function ChatBubble({ role, content, agent, timestamp }) {
   return (
     <div
       className={cn(
-        "flex gap-3 px-4 py-6",
-        isUser ? "bg-transparent" : "bg-muted/30"
+        "flex gap-3 px-4 py-4",
+        isUser && "flex-row-reverse"
       )}
     >
-      <Avatar className="size-8 shrink-0">
-        <AvatarFallback className={cn(!isUser && "bg-primary/10 text-primary")}>
-          {isUser ? (
-            currentUser.initials
-          ) : (
+      {isUser ? (
+        <UserAvatar
+          initials={currentUser.initials}
+          src={currentUser.avatar}
+          className="size-8 shrink-0"
+        />
+      ) : (
+        <Avatar className="size-8 shrink-0">
+          <AvatarFallback className="bg-primary/10 text-primary">
             <Bot />
-          )}
-        </AvatarFallback>
-      </Avatar>
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <div className="flex items-center gap-2">
+          </AvatarFallback>
+        </Avatar>
+      )}
+      <div
+        className={cn(
+          "flex min-w-0 flex-col gap-1",
+          isUser ? "items-end max-w-[80%]" : "flex-1"
+        )}
+      >
+        <div className={cn("flex items-center gap-2", isUser && "flex-row-reverse")}>
           <span className="text-sm font-medium">
-            {isUser ? currentUser.name : agent || "Nova"}
+            {isUser ? currentUser.name : agent || "OpenBase AI"}
           </span>
           <span className="text-xs text-muted-foreground">{timestamp}</span>
         </div>
-        <div className="prose prose-sm dark:prose-invert max-w-none text-sm leading-relaxed whitespace-pre-wrap">
+        <div
+          className={cn(
+            "text-sm leading-relaxed whitespace-pre-wrap",
+            isUser
+              ? "rounded-2xl bg-primary px-4 py-2.5 text-primary-foreground"
+              : "rounded-2xl bg-muted px-4 py-2.5 text-foreground"
+          )}
+        >
           {content}
         </div>
       </div>

@@ -6,11 +6,11 @@ import {
   FolderKanban,
   MessageSquare,
   Plus,
-  Sparkles,
+  Eye,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { TeamAvatars } from "@/components/shared/UserAvatar"
 import { Progress } from "@/components/ui/progress"
 import { PageHeader } from "@/components/dashboard/PageHeader"
 import { StatCard } from "@/components/dashboard/StatCard"
@@ -118,13 +118,7 @@ export function OverviewPage() {
                   <FolderKanban className="text-muted-foreground" />
                 </div>
                 <Progress value={project.progress} />
-                <div className="flex -space-x-2">
-                  {project.team.map((initials) => (
-                    <Avatar key={initials} className="size-6 border-2 border-background">
-                      <AvatarFallback className="text-[10px]">{initials}</AvatarFallback>
-                    </Avatar>
-                  ))}
-                </div>
+                <TeamAvatars members={project.team} avatarClassName="size-6" />
               </div>
             ))}
           </div>
@@ -165,7 +159,7 @@ export function OverviewPage() {
             { label: "Start AI Chat", icon: MessageSquare, href: "/ai-chat" },
             { label: "Upload Document", icon: FileText, href: "/documents" },
             { label: "New Project", icon: FolderKanban, href: "/projects" },
-            { label: "Browse Agents", icon: Sparkles, href: "/ai-chat" },
+            { label: "Browse Agents", icon: Eye, href: "/ai-chat" },
           ].map((action) => (
             <Button
               key={action.label}
