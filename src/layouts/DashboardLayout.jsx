@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { AppSidebar } from "@/components/layout/AppSidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 import { AppNavbar } from "@/components/layout/AppNavbar"
 
 const pageTitles = {
@@ -20,15 +20,21 @@ export function DashboardLayout() {
 
   return (
     <TooltipProvider>
-      <SidebarProvider defaultOpen>
+      <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
           {!isFullBleed && (
             <AppNavbar title={pageInfo.title} parent={pageInfo.parent} />
           )}
-          <main className={isFullBleed ? "flex flex-1 flex-col overflow-hidden" : "flex-1 overflow-auto p-6"}>
+          <div
+            className={
+              isFullBleed
+                ? "flex flex-1 flex-col overflow-hidden"
+                : "flex flex-1 flex-col gap-4 overflow-auto p-4 pt-0"
+            }
+          >
             <Outlet />
-          </main>
+          </div>
         </SidebarInset>
       </SidebarProvider>
     </TooltipProvider>

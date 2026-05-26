@@ -38,6 +38,11 @@ export const directMessages = [
   { id: "dm-3", name: "Morgan Lee", status: "online", unread: 0, initials: "ML", avatar: avatarImages.ML },
 ]
 
+export const totalUnreadMessages =
+  channels.reduce((sum, c) => sum + c.unread, 0) +
+  groupChats.reduce((sum, g) => sum + g.unread, 0) +
+  directMessages.reduce((sum, d) => sum + d.unread, 0)
+
 export const channelMessages = [
   {
     id: "cm-1",
