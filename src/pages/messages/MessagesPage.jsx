@@ -37,7 +37,7 @@ export function MessagesPage() {
         : activeChannel
 
   return (
-    <div className="flex h-[calc(100svh-8rem)] flex-col gap-4">
+    <div className="flex h-full min-h-0 flex-1 flex-col gap-4">
       <PageHeader
         title="Messages"
         description="Team communication across channels, groups, and direct messages"

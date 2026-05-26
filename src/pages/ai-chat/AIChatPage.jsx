@@ -46,7 +46,7 @@ export function AIChatPage() {
   const selectedContext = chatContexts.find((c) => c.id === context)
 
   return (
-    <div className="flex h-[calc(100svh-0px)] flex-col">
+    <div className="flex h-full min-h-0 flex-1 flex-col">
       <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
         <SidebarTrigger />
         <Separator orientation="vertical" className="h-4" />
@@ -70,6 +70,12 @@ export function AIChatPage() {
           onSelectChat={(id) => {
             setActiveChat(id)
             setShowChat(true)
+          }}
+          onNewChat={() => {
+            setActiveChat("")
+            setMessages([])
+            setInput("")
+            setShowChat(false)
           }}
         />
 
