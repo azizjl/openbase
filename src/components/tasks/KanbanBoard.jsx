@@ -7,7 +7,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core"
-import { TaskCard } from "@/components/tasks/TaskCard"
+import { TaskCard, TaskCardOverlay } from "@/components/tasks/TaskCard"
 import { KanbanColumn } from "@/components/tasks/KanbanColumn"
 import { taskColumns } from "@/data/tasks"
 
@@ -71,12 +71,8 @@ export function KanbanBoard({ initialTasks }) {
           )
         })}
       </div>
-      <DragOverlay>
-        {activeTask ? (
-          <div className="w-72 rotate-2 opacity-90">
-            <TaskCard task={activeTask} isDragging />
-          </div>
-        ) : null}
+      <DragOverlay dropAnimation={null}>
+        {activeTask ? <TaskCardOverlay task={activeTask} /> : null}
       </DragOverlay>
     </DndContext>
   )
