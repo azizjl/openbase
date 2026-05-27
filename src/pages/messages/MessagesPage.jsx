@@ -12,7 +12,6 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { Send } from "lucide-react"
-import { PageHeader } from "@/components/dashboard/PageHeader"
 import { MessageBubble } from "@/components/messages/MessageBubble"
 import { UserAvatar } from "@/components/shared/UserAvatar"
 import {
@@ -23,6 +22,12 @@ import {
   onlineUsers,
 } from "@/data/messages"
 import { cn } from "@/lib/utils"
+
+function truncateWords(text, maxWords = 3) {
+  const words = text.trim().split(/\s+/).filter(Boolean)
+  if (words.length <= maxWords) return text
+  return `${words.slice(0, maxWords).join(" ")}...`
+}
 
 export function MessagesPage() {
   const [activeChannel, setActiveChannel] = useState("product")
@@ -37,20 +42,16 @@ export function MessagesPage() {
         : activeChannel
 
   return (
-    <div className="flex h-full min-h-0 flex-1 flex-col gap-4">
-      <PageHeader
-        title="Messages"
-        description="Team communication across channels, groups, and direct messages"
-      >
-        <Button size="sm">
-          <Plus data-icon="inline-start" />
-          New channel
-        </Button>
-      </PageHeader>
-
-      <div className="flex flex-1 overflow-hidden rounded-xl border">
-        <div className="flex w-60 shrink-0 flex-col border-r bg-sidebar">
-          <ScrollArea className="flex-1">
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      <div className="flex min-h-0 flex-1 overflow-hidden rounded-xl border">
+        <div className="flex w-60 min-h-0 shrink-0 flex-col border-r bg-sidebar">
+          <div className="shrink-0 border-b p-3">
+            <Button size="sm" className="w-full">
+              <Plus data-icon="inline-start" />
+              New channel
+            </Button>
+          </div>
+          <ScrollArea className="h-0 min-h-0 flex-1">
             <div className="flex flex-col gap-1 p-3">
               <span className="px-2 text-xs font-medium text-muted-foreground">Channels</span>
               {channels.map((ch) => (
@@ -94,19 +95,19 @@ export function MessagesPage() {
                     activeType === "group" && activeChannel === group.id && "bg-sidebar-accent"
                   )}
                 >
-                  <AvatarGroup className="shrink-0">
+                  <AvatarGroup className="shrink-0 *:data-[slot=avatar]:ring-1 *:data-[slot=avatar]:ring-sidebar">
                     {group.members.slice(0, 3).map((initials) => (
                       <UserAvatar
                         key={initials}
                         initials={initials}
-                        className="size-6 border-2 border-sidebar"
+                        className="size-6 border border-sidebar"
                       />
                     ))}
                   </AvatarGroup>
                   <div className="flex min-w-0 flex-1 flex-col items-start">
                     <span className="truncate font-medium">{group.name}</span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {group.lastMessage}
+                      {truncateWords(group.lastMessage)}
                     </span>
                   </div>
                   {group.unread > 0 && (
