@@ -9,6 +9,7 @@ import { MessagesPage } from "@/pages/messages/MessagesPage"
 import { TasksPage } from "@/pages/tasks/TasksPage"
 import { ProjectsPage } from "@/pages/projects/ProjectsPage"
 import { DocumentsPage } from "@/pages/documents/DocumentsPage"
+import { CalendarPage } from "@/pages/calendar/CalendarPage"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/ai-chat" element={<AIChatPage />} />
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/documents" element={<DocumentsPage />} />
         </Route>

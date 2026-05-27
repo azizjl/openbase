@@ -10,6 +10,7 @@ const pageTitles = {
   "/ai-chat": { title: "AI Chat", parent: "Platform" },
   "/messages": { title: "Messages", parent: "Platform" },
   "/tasks": { title: "Tasks", parent: "Platform" },
+  "/calendar": { title: "Calendar", parent: "Platform" },
   "/projects": { title: "Projects", parent: "Platform" },
   "/documents": { title: "Documents", parent: "Platform" },
 }

@@ -1,4 +1,5 @@
 import {
+  Calendar,
   CheckSquare,
   ChevronsUpDown,
   Eye,
@@ -62,6 +63,11 @@ const navMain = [
     title: "Tasks",
     url: "/tasks",
     icon: <CheckSquare />,
+  },
+  {
+    title: "Calendar",
+    url: "/calendar",
+    icon: <Calendar />,
   },
   {
     title: "Projects",
