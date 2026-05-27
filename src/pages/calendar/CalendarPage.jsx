@@ -2,7 +2,6 @@ import { useMemo, useState } from "react"
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { PageHeader } from "@/components/dashboard/PageHeader"
 import { CalendarGrid } from "@/components/calendar/CalendarGrid"
 import { UpcomingAgenda } from "@/components/calendar/UpcomingAgenda"
 import { EventDetailDialog } from "@/components/calendar/EventDetailDialog"
@@ -46,26 +45,8 @@ export function CalendarPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader
-        title="Calendar"
-        description="Meetings, personal events, and task deadlines in one place"
-      >
-        <Button size="sm">
-          <Plus data-icon="inline-start" />
-          New event
-        </Button>
-      </PageHeader>
-
-      <div className="flex flex-wrap items-center gap-2">
-        {Object.entries(eventTypes).map(([key, info]) => (
-          <Badge key={key} variant="outline" className={cn("border font-normal", info.color)}>
-            {info.label}
-          </Badge>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1">
+      <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
+        <div className="flex items-center gap-1 justify-self-start">
           <Button variant="outline" size="icon" onClick={goToPrevMonth}>
             <ChevronLeft />
           </Button>
@@ -74,9 +55,24 @@ export function CalendarPage() {
           </Button>
           <h2 className="ml-2 font-heading text-lg font-semibold">{monthLabel}</h2>
         </div>
-        <Button variant="outline" size="sm" onClick={goToToday}>
-          Today
-        </Button>
+
+        <div className="flex flex-wrap items-center justify-center gap-2 justify-self-center">
+          {Object.entries(eventTypes).map(([key, info]) => (
+            <Badge key={key} variant="outline" className={cn("border font-normal", info.color)}>
+              {info.label}
+            </Badge>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 justify-self-end">
+          <Button variant="outline" size="sm" onClick={goToToday}>
+            Today
+          </Button>
+          <Button size="sm">
+            <Plus data-icon="inline-start" />
+            New event
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">

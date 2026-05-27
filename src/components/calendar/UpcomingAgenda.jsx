@@ -18,7 +18,8 @@ export function UpcomingAgenda({ events, selectedDate, onSelectEvent }) {
 
   return (
     <DashboardCard title={title} description="Events, meetings & deadlines">
-      <ScrollArea className="h-[420px] pr-2">
+      {/* <ScrollArea className="h-[420px] pr-2"> */}
+      <ScrollArea className="pr-2">
         {sorted.length === 0 ? (
           <p className="py-8 text-center text-sm text-muted-foreground">
             No events scheduled
