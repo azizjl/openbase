@@ -38,15 +38,11 @@ export function ChatSidebar({
     <div className="flex h-full w-64 shrink-0 flex-col border-r bg-background">
       <div className="flex items-center gap-2 p-3 pb-2">
         <Button
-          variant="outline"
-          size="default"
-          className={cn(
-            "h-10 min-w-0 flex-1 justify-start gap-2 rounded-xl border-dashed font-medium shadow-none",
-            "border-border/80 bg-muted/30 hover:border-primary/40 hover:bg-muted/60 hover:text-foreground"
-          )}
+          size="sm"
+          className="h-10 min-w-0 flex-1 justify-center gap-2 border-transparent bg-[#49a052] text-white hover:bg-[#49a052]/90"
           onClick={onNewChat}
         >
-          <MessageSquarePlus data-icon="inline-start" />
+          <MessageSquarePlus className="size-4" />
           New chat
         </Button>
         <Button

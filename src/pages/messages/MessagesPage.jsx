@@ -51,9 +51,9 @@ export function MessagesPage() {
           <div className="shrink-0 border-b p-3">
             <Button
               size="sm"
-              className="w-full border-transparent bg-[#49a052] text-white hover:bg-[#49a052]/90"
+              className="h-10 w-full justify-center gap-2 border-transparent bg-[#49a052] text-white hover:bg-[#49a052]/90"
             >
-              <Plus data-icon="inline-start" />
+              <Plus className="size-4" />
               New channel
             </Button>
           </div>

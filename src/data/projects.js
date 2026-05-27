@@ -1,5 +1,28 @@
 import { avatarImages } from "@/lib/avatars"
 
+export const projectStatuses = {
+  active: {
+    label: "Active",
+    color:
+      "bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30",
+  },
+  completed: {
+    label: "Completed",
+    color:
+      "bg-emerald-500/15 text-emerald-800 dark:text-emerald-200 border-emerald-500/30",
+  },
+  paused: {
+    label: "Paused",
+    color:
+      "bg-amber-500/15 text-amber-800 dark:text-amber-200 border-amber-500/30",
+  },
+  archived: {
+    label: "Archived",
+    color:
+      "bg-slate-500/15 text-slate-700 dark:text-slate-300 border-slate-500/30",
+  },
+}
+
 export const projects = [
   {
     id: "proj-1",

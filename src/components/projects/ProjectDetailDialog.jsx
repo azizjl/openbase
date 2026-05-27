@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { ProjectStatusBadge } from "@/components/projects/ProjectStatusBadge"
 import { Separator } from "@/components/ui/separator"
 import { TeamAvatars } from "@/components/shared/UserAvatar"
 
@@ -20,9 +20,7 @@ export function ProjectDetailDialog({ project, open, onOpenChange }) {
         <DialogHeader>
           <div className="flex items-start justify-between gap-2 pr-8">
             <DialogTitle>{project.name}</DialogTitle>
-            <Badge variant={project.status === "completed" ? "secondary" : "default"}>
-              {project.status}
-            </Badge>
+            <ProjectStatusBadge status={project.status} />
           </div>
           <DialogDescription>{project.description}</DialogDescription>
         </DialogHeader>
@@ -33,7 +31,10 @@ export function ProjectDetailDialog({ project, open, onOpenChange }) {
               <span className="text-muted-foreground">Progress</span>
               <span className="font-medium">{project.progress}%</span>
             </div>
-            <Progress value={project.progress} />
+            <Progress
+              value={project.progress}
+              className="[&_[data-slot=progress-indicator]]:bg-emerald-500 dark:[&_[data-slot=progress-indicator]]:bg-emerald-400"
+            />
             <p className="text-xs text-muted-foreground">
               {project.completedTasks} of {project.tasksCount} tasks completed
             </p>

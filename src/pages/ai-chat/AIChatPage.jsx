@@ -1,27 +1,32 @@
-import { useState } from "react"
-import { Eye, Settings } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom"
+import { Eye } from "lucide-react"
 import { ChatSidebar } from "@/components/chat/ChatSidebar"
 import { ChatBubble } from "@/components/chat/ChatBubble"
 import { ChatInput } from "@/components/chat/ChatInput"
-import { AIModelSelector } from "@/components/chat/AIModelSelector"
 import { SuggestedPromptCard } from "@/components/chat/SuggestedPromptCard"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { UserDropdown } from "@/components/layout/UserDropdown"
 import { chatMessages } from "@/data/chats"
 import { suggestedPrompts, aiAgents } from "@/data/agents"
-import { chatContexts } from "@/data/chatContexts"
 
 export function AIChatPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { activeAgent = "agent-1" } = useOutletContext() ?? {}
   const [activeChat, setActiveChat] = useState("chat-1")
-  const [activeAgent, setActiveAgent] = useState("agent-1")
   const [input, setInput] = useState("")
   const [context, setContext] = useState("none")
   const [messages, setMessages] = useState(chatMessages)
   const [showChat, setShowChat] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+
+  useEffect(() => {
+    const initialQuery = location.state?.initialQuery
+    if (!initialQuery) return
+    setInput(initialQuery)
+    setShowChat(true)
+    navigate(location.pathname, { replace: true, state: null })
+  }, [location.state?.initialQuery, location.pathname, navigate])
 
   const handleSend = () => {
     if (!input.trim()) return
@@ -44,27 +49,9 @@ export function AIChatPage() {
   }
 
   const agent = aiAgents.find((a) => a.id === activeAgent)
-  const selectedContext = chatContexts.find((c) => c.id === context)
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
-      <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-        <SidebarTrigger />
-        <Separator orientation="vertical" className="h-4" />
-        <AIModelSelector selectedAgent={activeAgent} onSelect={setActiveAgent} />
-        {selectedContext && selectedContext.id !== "none" && (
-          <span className="hidden text-xs text-muted-foreground sm:inline">
-            · {selectedContext.label}
-          </span>
-        )}
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <Settings />
-          </Button>
-          <UserDropdown />
-        </div>
-      </header>
-
       <div className="flex flex-1 overflow-hidden">
         <ChatSidebar
           activeChat={activeChat}
@@ -107,11 +94,12 @@ export function AIChatPage() {
                 </div>
               </div>
               <div className="grid w-full max-w-2xl gap-3 sm:grid-cols-2">
-                {suggestedPrompts.map((prompt) => (
+                {suggestedPrompts.map((item) => (
                   <SuggestedPromptCard
-                    key={prompt}
-                    prompt={prompt}
-                    onClick={() => handlePrompt(prompt)}
+                    key={item.text}
+                    prompt={item.text}
+                    icon={item.icon}
+                    onClick={() => handlePrompt(item.text)}
                   />
                 ))}
               </div>

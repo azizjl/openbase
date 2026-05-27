@@ -1,3 +1,5 @@
+import { Headphones, ListChecks, Mail, Map } from "lucide-react"
+
 export const aiAgents = [
   {
     id: "agent-1",
@@ -38,8 +40,20 @@ export const aiAgents = [
 ]
 
 export const suggestedPrompts = [
-  "Summarize our Q1 product roadmap",
-  "Draft a client onboarding email",
-  "Analyze last week's support tickets",
-  "Create a sprint planning checklist",
+  {
+    text: "Summarize our Q1 product roadmap",
+    icon: Map,
+  },
+  {
+    text: "Draft a client onboarding email",
+    icon: Mail,
+  },
+  {
+    text: "Analyze last week's support tickets",
+    icon: Headphones,
+  },
+  {
+    text: "Create a sprint planning checklist",
+    icon: ListChecks,
+  },
 ]

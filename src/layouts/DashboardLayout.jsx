@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AppSidebar } from "@/components/app-sidebar"
+import { AIModelSelector } from "@/components/chat/AIModelSelector"
 import { AppNavbar } from "@/components/layout/AppNavbar"
 import { cn } from "@/lib/utils"
 
@@ -21,15 +23,25 @@ export function DashboardLayout() {
   const isAiChat = location.pathname === "/ai-chat"
   const isMessages = location.pathname === "/messages"
   const isFullHeightPage = isAiChat || isMessages
+  const [activeAgent, setActiveAgent] = useState("agent-1")
 
   return (
     <TooltipProvider>
       <SidebarProvider className="max-h-svh overflow-hidden">
         <AppSidebar />
         <SidebarInset className="min-h-0 overflow-hidden">
-          {!isAiChat && (
-            <AppNavbar title={pageInfo.title} parent={pageInfo.parent} />
-          )}
+          <AppNavbar
+            title={pageInfo.title}
+            parent={pageInfo.parent}
+            agentSelector={
+              isAiChat ? (
+                <AIModelSelector
+                  selectedAgent={activeAgent}
+                  onSelect={setActiveAgent}
+                />
+              ) : null
+            }
+          />
           <div
             className={cn(
               "flex min-h-0 flex-1 flex-col",
@@ -37,7 +49,7 @@ export function DashboardLayout() {
               !isFullHeightPage && "overflow-y-auto px-4 pb-6 pt-6"
             )}
           >
-            <Outlet />
+            <Outlet context={isAiChat ? { activeAgent } : undefined} />
           </div>
         </SidebarInset>
       </SidebarProvider>

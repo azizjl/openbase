@@ -1,5 +1,6 @@
 import { Bot } from "lucide-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { ChatMessageContent } from "@/components/chat/ChatMessageContent"
 import { UserAvatar } from "@/components/shared/UserAvatar"
 import { cn } from "@/lib/utils"
 import { currentUser } from "@/data/user"
@@ -43,11 +44,11 @@ export function ChatBubble({ role, content, agent, timestamp }) {
           className={cn(
             "text-sm leading-relaxed whitespace-pre-wrap",
             isUser
-              ? "rounded-2xl bg-primary px-4 py-2.5 text-primary-foreground"
+              ? "rounded-xl bg-sidebar-accent px-4 py-2.5 text-sidebar-accent-foreground"
               : "rounded-2xl bg-muted px-4 py-2.5 text-foreground"
           )}
         >
-          {content}
+          {isUser ? content : <ChatMessageContent content={content} />}
         </div>
       </div>
     </div>

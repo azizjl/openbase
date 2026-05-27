@@ -1,6 +1,6 @@
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import { ProjectStatusBadge } from "@/components/projects/ProjectStatusBadge"
 import { TeamAvatars } from "@/components/shared/UserAvatar"
 import { cn } from "@/lib/utils"
 
@@ -15,9 +15,7 @@ export function ProjectCard({ project, onClick }) {
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <CardTitle>{project.name}</CardTitle>
-          <Badge variant={project.status === "completed" ? "secondary" : "default"}>
-            {project.status}
-          </Badge>
+          <ProjectStatusBadge status={project.status} />
         </div>
         <CardDescription className="line-clamp-2">{project.description}</CardDescription>
       </CardHeader>
@@ -29,7 +27,10 @@ export function ProjectCard({ project, onClick }) {
             </span>
             <span>{project.progress}%</span>
           </div>
-          <Progress value={project.progress} />
+          <Progress
+            value={project.progress}
+            className="[&_[data-slot=progress-indicator]]:bg-emerald-500 dark:[&_[data-slot=progress-indicator]]:bg-emerald-400"
+          />
         </div>
         <div className="flex items-center justify-between">
           <TeamAvatars members={project.team} />
