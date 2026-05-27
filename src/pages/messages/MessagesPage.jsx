@@ -23,6 +23,9 @@ import {
 } from "@/data/messages"
 import { cn } from "@/lib/utils"
 
+const unreadBadgeClassName =
+  "size-5 justify-center border-transparent bg-[#49a052] p-0 text-[10px] text-white hover:bg-[#49a052]/90"
+
 function truncateWords(text, maxWords = 3) {
   const words = text.trim().split(/\s+/).filter(Boolean)
   if (words.length <= maxWords) return text
@@ -43,15 +46,18 @@ export function MessagesPage() {
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
-      <div className="flex min-h-0 flex-1 overflow-hidden rounded-xl border">
-        <div className="flex w-60 min-h-0 shrink-0 flex-col border-r bg-sidebar">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
+        <div className="flex w-60 min-h-0 shrink-0 flex-col border-r bg-background">
           <div className="shrink-0 border-b p-3">
-            <Button size="sm" className="w-full">
+            <Button
+              size="sm"
+              className="w-full border-transparent bg-[#49a052] text-white hover:bg-[#49a052]/90"
+            >
               <Plus data-icon="inline-start" />
               New channel
             </Button>
           </div>
-          <ScrollArea className="h-0 min-h-0 flex-1">
+          <ScrollArea className="h-0 min-h-0 flex-1 [&_[data-slot=scroll-area-scrollbar]]:hidden">
             <div className="flex flex-col gap-1 p-3">
               <span className="px-2 text-xs font-medium text-muted-foreground">Channels</span>
               {channels.map((ch) => (
@@ -63,16 +69,14 @@ export function MessagesPage() {
                     setActiveType("channel")
                   }}
                   className={cn(
-                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent",
-                    activeType === "channel" && activeChannel === ch.name && "bg-sidebar-accent"
+                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+                    activeType === "channel" && activeChannel === ch.name && "bg-muted"
                   )}
                 >
                   <Hash className="text-muted-foreground" />
                   <span className="flex-1 truncate text-left">{ch.name}</span>
                   {ch.unread > 0 && (
-                    <Badge variant="default" className="size-5 justify-center p-0 text-[10px]">
-                      {ch.unread}
-                    </Badge>
+                    <Badge className={unreadBadgeClassName}>{ch.unread}</Badge>
                   )}
                 </button>
               ))}
@@ -91,16 +95,16 @@ export function MessagesPage() {
                     setActiveType("group")
                   }}
                   className={cn(
-                    "flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors hover:bg-sidebar-accent",
-                    activeType === "group" && activeChannel === group.id && "bg-sidebar-accent"
+                    "flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors hover:bg-muted",
+                    activeType === "group" && activeChannel === group.id && "bg-muted"
                   )}
                 >
-                  <AvatarGroup className="shrink-0 *:data-[slot=avatar]:ring-1 *:data-[slot=avatar]:ring-sidebar">
+                  <AvatarGroup className="shrink-0 *:data-[slot=avatar]:ring-1 *:data-[slot=avatar]:ring-background">
                     {group.members.slice(0, 3).map((initials) => (
                       <UserAvatar
                         key={initials}
                         initials={initials}
-                        className="size-6 border border-sidebar"
+                        className="size-6 border border-background"
                       />
                     ))}
                   </AvatarGroup>
@@ -111,7 +115,7 @@ export function MessagesPage() {
                     </span>
                   </div>
                   {group.unread > 0 && (
-                    <Badge variant="default" className="size-5 shrink-0 justify-center p-0 text-[10px]">
+                    <Badge className={cn(unreadBadgeClassName, "shrink-0")}>
                       {group.unread}
                     </Badge>
                   )}
@@ -132,16 +136,14 @@ export function MessagesPage() {
                     setActiveType("dm")
                   }}
                   className={cn(
-                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent",
-                    activeType === "dm" && activeChannel === dm.id && "bg-sidebar-accent"
+                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+                    activeType === "dm" && activeChannel === dm.id && "bg-muted"
                   )}
                 >
                   <UserAvatar initials={dm.initials} src={dm.avatar} className="size-7 shrink-0" />
                   <span className="flex-1 truncate text-left">{dm.name}</span>
                   {dm.unread > 0 && (
-                    <Badge variant="default" className="size-5 justify-center p-0 text-[10px]">
-                      {dm.unread}
-                    </Badge>
+                    <Badge className={unreadBadgeClassName}>{dm.unread}</Badge>
                   )}
                 </button>
               ))}
@@ -149,8 +151,8 @@ export function MessagesPage() {
           </ScrollArea>
         </div>
 
-        <div className="flex flex-1 flex-col">
-          <div className="flex h-12 items-center gap-2 border-b px-4">
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+          <div className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
             {activeType === "channel" ? (
               <Hash className="text-muted-foreground" />
             ) : activeType === "group" ? (
@@ -176,12 +178,12 @@ export function MessagesPage() {
               · {activeType === "dm" ? "Direct message" : activeType === "group" ? "Group" : "12 members"}
             </span>
           </div>
-          <ScrollArea className="flex-1 py-4">
+          <ScrollArea className="min-h-0 flex-1 py-4">
             {channelMessages.map((msg) => (
               <MessageBubble key={msg.id} {...msg} />
             ))}
           </ScrollArea>
-          <div className="border-t p-4">
+          <div className="shrink-0 border-t p-4">
             <InputGroup>
               <InputGroupInput
                 placeholder={`Message ${activeLabel}`}
@@ -197,7 +199,7 @@ export function MessagesPage() {
           </div>
         </div>
 
-        <div className="hidden w-52 shrink-0 flex-col border-l bg-sidebar xl:flex">
+        <div className="hidden min-h-0 w-52 shrink-0 flex-col border-l bg-background xl:flex">
           <div className="flex items-center gap-2 p-3">
             <Users className="text-muted-foreground" />
             <span className="text-xs font-medium text-muted-foreground">
@@ -209,7 +211,7 @@ export function MessagesPage() {
               {onlineUsers.map((user) => (
                 <div
                   key={user.name}
-                  className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-sidebar-accent"
+                  className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted"
                 >
                   <UserAvatar initials={user.initials} src={user.avatar} className="size-7" />
                   <span className="truncate text-sm">{user.name}</span>

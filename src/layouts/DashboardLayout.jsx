@@ -20,6 +20,7 @@ export function DashboardLayout() {
   const pageInfo = pageTitles[location.pathname] || { title: "Dashboard" }
   const isAiChat = location.pathname === "/ai-chat"
   const isMessages = location.pathname === "/messages"
+  const isFullHeightPage = isAiChat || isMessages
 
   return (
     <TooltipProvider>
@@ -32,9 +33,8 @@ export function DashboardLayout() {
           <div
             className={cn(
               "flex min-h-0 flex-1 flex-col",
-              isAiChat && "overflow-hidden",
-              isMessages && "overflow-hidden px-4 pb-4 pt-6",
-              !isAiChat && !isMessages && "overflow-y-auto px-4 pb-6 pt-6"
+              isFullHeightPage && "overflow-hidden",
+              !isFullHeightPage && "overflow-y-auto px-4 pb-6 pt-6"
             )}
           >
             <Outlet />

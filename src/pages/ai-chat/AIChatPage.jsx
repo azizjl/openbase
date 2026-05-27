@@ -21,6 +21,7 @@ export function AIChatPage() {
   const [context, setContext] = useState("none")
   const [messages, setMessages] = useState(chatMessages)
   const [showChat, setShowChat] = useState(true)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   const handleSend = () => {
     if (!input.trim()) return
@@ -67,6 +68,8 @@ export function AIChatPage() {
       <div className="flex flex-1 overflow-hidden">
         <ChatSidebar
           activeChat={activeChat}
+          collapsed={sidebarCollapsed}
+          onToggleCollapsed={() => setSidebarCollapsed((prev) => !prev)}
           onSelectChat={(id) => {
             setActiveChat(id)
             setShowChat(true)

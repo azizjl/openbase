@@ -13,7 +13,9 @@ export function MessageBubble({ user, initials, avatar, content, timestamp, isOw
         <div
           className={cn(
             "rounded-xl px-3 py-2 text-sm",
-            isOwn ? "bg-primary text-primary-foreground" : "bg-muted"
+            isOwn
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "bg-muted"
           )}
         >
           {content}
