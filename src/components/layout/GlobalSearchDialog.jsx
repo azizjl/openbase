@@ -10,6 +10,7 @@ import {
   MessageCircle,
   MessageSquare,
   Network,
+  Presentation,
   ScrollText,
   Sparkles,
   User,
@@ -40,6 +41,7 @@ const typeIcons = {
   user: User,
   employee: Network,
   log: ScrollText,
+  presentation: Presentation,
 }
 
 const typeIconStyles = {
@@ -86,6 +88,10 @@ const typeIconStyles = {
   log: {
     bg: "bg-orange-500/12",
     icon: "text-orange-700 dark:text-orange-300",
+  },
+  presentation: {
+    bg: "bg-fuchsia-500/12",
+    icon: "text-fuchsia-700 dark:text-fuchsia-300",
   },
 }
 

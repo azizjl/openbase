@@ -1,0 +1,36 @@
+.openbase-slide-tldraw,
+.openbase-slide-tldraw .tl-container {
+  height: 100%;
+  width: 100%;
+}
+
+.openbase-slide-tldraw .tl-watermark_SEE-LICENSE {
+  display: none;
+}
+
+.openbase-slide-tldraw[data-color-scheme="dark"] .tl-background {
+  background: #141414 !important;
+}
+
+.openbase-slide-tldraw[data-color-scheme="light"] .tl-background {
+  background: #ffffff !important;
+}
+
+.present-slide-canvas .openbase-slide-tldraw .tlui-layout {
+  display: none;
+}
+
+.present-slide-canvas .openbase-slide-tldraw,
+.present-slide-canvas .openbase-slide-tldraw .tl-background {
+  background: #141414 !important;
+}
+
+.present-slide-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.present-slide-placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}

@@ -130,3 +130,19 @@
     @apply font-sans;
     }
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .reveal-viewport,
+  .reveal-viewport * {
+    visibility: visible;
+  }
+
+  .reveal-viewport {
+    position: absolute;
+    inset: 0;
+  }
+}

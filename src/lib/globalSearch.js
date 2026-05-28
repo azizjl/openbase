@@ -6,6 +6,7 @@ import { documents } from "@/data/documents"
 import { calendarEvents, eventTypes } from "@/data/calendar"
 import { employees, getDepartmentById } from "@/data/employees"
 import { logs } from "@/data/logs"
+import { getAllPresentations } from "@/lib/presentationStore"
 import { onlineUsers } from "@/data/messages"
 
 export const searchGroupLabels = {
@@ -20,6 +21,7 @@ export const searchGroupLabels = {
   user: "People",
   employee: "Org chart",
   log: "Logs",
+  presentation: "Presentations",
 }
 
 const searchIndex = [
@@ -152,6 +154,14 @@ const searchIndex = [
       "log",
       "audit",
     ],
+  })),
+  ...getAllPresentations().map((deck) => ({
+    id: deck.id,
+    type: "presentation",
+    title: deck.title,
+    subtitle: `${deck.slideCount} slides · ${deck.author}`,
+    href: `/presentations/${deck.id}`,
+    keywords: [deck.title, deck.prompt, deck.author, "presentation", "slides", "deck"],
   })),
 ]
 

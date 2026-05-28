@@ -10,6 +10,9 @@ import { TasksPage } from "@/pages/tasks/TasksPage"
 import { ProjectsPage } from "@/pages/projects/ProjectsPage"
 import { DocumentsPage } from "@/pages/documents/DocumentsPage"
 import { CalendarPage } from "@/pages/calendar/CalendarPage"
+import { PresentationsPage } from "@/pages/presentations/PresentationsPage"
+import { PresentationEditorPage } from "@/pages/presentations/PresentationEditorPage"
+import { PresentationPresentPage } from "@/pages/presentations/PresentationPresentPage"
 import { LogsPage } from "@/pages/logs/LogsPage"
 import { OrgChartPage } from "@/pages/org-chart/OrgChartPage"
 
@@ -30,6 +33,9 @@ function App() {
           <Route path="/documents" element={<DocumentsPage />} />
           <Route path="/org-chart" element={<OrgChartPage />} />
           <Route path="/logs" element={<LogsPage />} />
+          <Route path="/presentations" element={<PresentationsPage />} />
+          <Route path="/presentations/:id" element={<PresentationEditorPage />} />
+          <Route path="/presentations/:id/present" element={<PresentationPresentPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
