@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   MessageSquare,
   MessagesSquare,
+  Network,
   PieChart,
   Send,
 } from "lucide-react"
@@ -58,6 +59,11 @@ const navMain = [
     url: "/messages",
     icon: <MessagesSquare />,
     badge: totalUnreadMessages,
+  },
+  {
+    title: "People",
+    url: "/org-chart",
+    icon: <Network />,
   },
   {
     title: "Tasks",

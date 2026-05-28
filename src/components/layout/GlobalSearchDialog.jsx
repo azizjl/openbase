@@ -9,6 +9,7 @@ import {
   Hash,
   MessageCircle,
   MessageSquare,
+  Network,
   Sparkles,
   User,
   Users,
@@ -36,6 +37,7 @@ const typeIcons = {
   document: FileText,
   calendar: Calendar,
   user: User,
+  employee: Network,
 }
 
 const typeIconStyles = {
@@ -74,6 +76,10 @@ const typeIconStyles = {
   user: {
     bg: "bg-teal-500/12",
     icon: "text-teal-700 dark:text-teal-300",
+  },
+  employee: {
+    bg: "bg-indigo-500/12",
+    icon: "text-indigo-700 dark:text-indigo-300",
   },
 }
 

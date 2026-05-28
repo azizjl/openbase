@@ -4,6 +4,7 @@ import { projects } from "@/data/projects"
 import { tasks } from "@/data/tasks"
 import { documents } from "@/data/documents"
 import { calendarEvents, eventTypes } from "@/data/calendar"
+import { employees, getDepartmentById } from "@/data/employees"
 import { onlineUsers } from "@/data/messages"
 
 export const searchGroupLabels = {
@@ -16,6 +17,7 @@ export const searchGroupLabels = {
   document: "Documents",
   calendar: "Calendar",
   user: "People",
+  employee: "Org chart",
 }
 
 const searchIndex = [
@@ -112,6 +114,24 @@ const searchIndex = [
     subtitle: person.subtitle,
     href: "/messages",
     keywords: [person.name, person.initials, person.subtitle, "user", "people", "team"],
+  })),
+  ...employees.map((employee) => ({
+    id: employee.id,
+    type: "employee",
+    title: employee.name,
+    subtitle: `${employee.title}${employee.departmentId ? ` · ${getDepartmentById(employee.departmentId)?.name || ""}` : ""}`,
+    href: "/org-chart",
+    keywords: [
+      employee.name,
+      employee.title,
+      employee.email,
+      employee.initials,
+      employee.location,
+      employee.departmentId,
+      "employee",
+      "org chart",
+      "people",
+    ],
   })),
 ]
 

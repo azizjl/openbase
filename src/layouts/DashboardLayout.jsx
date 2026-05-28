@@ -15,6 +15,7 @@ const pageTitles = {
   "/calendar": { title: "Calendar", parent: "Platform" },
   "/projects": { title: "Projects", parent: "Platform" },
   "/documents": { title: "Documents", parent: "Platform" },
+  "/org-chart": { title: "People", parent: "Platform" },
 }
 
 export function DashboardLayout() {
@@ -22,7 +23,8 @@ export function DashboardLayout() {
   const pageInfo = pageTitles[location.pathname] || { title: "Dashboard" }
   const isAiChat = location.pathname === "/ai-chat"
   const isMessages = location.pathname === "/messages"
-  const isFullHeightPage = isAiChat || isMessages
+  const isOrgChart = location.pathname === "/org-chart"
+  const isFullHeightPage = isAiChat || isMessages || isOrgChart
   const [activeAgent, setActiveAgent] = useState("agent-1")
 
   return (
