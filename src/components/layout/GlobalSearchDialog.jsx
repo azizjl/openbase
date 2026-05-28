@@ -10,6 +10,7 @@ import {
   MessageCircle,
   MessageSquare,
   Network,
+  ScrollText,
   Sparkles,
   User,
   Users,
@@ -38,6 +39,7 @@ const typeIcons = {
   calendar: Calendar,
   user: User,
   employee: Network,
+  log: ScrollText,
 }
 
 const typeIconStyles = {
@@ -80,6 +82,10 @@ const typeIconStyles = {
   employee: {
     bg: "bg-indigo-500/12",
     icon: "text-indigo-700 dark:text-indigo-300",
+  },
+  log: {
+    bg: "bg-orange-500/12",
+    icon: "text-orange-700 dark:text-orange-300",
   },
 }
 

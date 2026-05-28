@@ -16,6 +16,7 @@ const pageTitles = {
   "/projects": { title: "Projects", parent: "Platform" },
   "/documents": { title: "Documents", parent: "Platform" },
   "/org-chart": { title: "People", parent: "Platform" },
+  "/logs": { title: "Logs", parent: "Platform" },
 }
 
 export function DashboardLayout() {

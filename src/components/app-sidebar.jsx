@@ -11,6 +11,7 @@ import {
   MessagesSquare,
   Network,
   PieChart,
+  ScrollText,
   Send,
 } from "lucide-react"
 import { NavMain } from "@/components/nav-main"
@@ -84,6 +85,11 @@ const navMain = [
     title: "Documents",
     url: "/documents",
     icon: <FileText />,
+  },
+  {
+    title: "Logs",
+    url: "/logs",
+    icon: <ScrollText />,
   },
 ]
 

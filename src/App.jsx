@@ -10,6 +10,7 @@ import { TasksPage } from "@/pages/tasks/TasksPage"
 import { ProjectsPage } from "@/pages/projects/ProjectsPage"
 import { DocumentsPage } from "@/pages/documents/DocumentsPage"
 import { CalendarPage } from "@/pages/calendar/CalendarPage"
+import { LogsPage } from "@/pages/logs/LogsPage"
 import { OrgChartPage } from "@/pages/org-chart/OrgChartPage"
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/documents" element={<DocumentsPage />} />
           <Route path="/org-chart" element={<OrgChartPage />} />
+          <Route path="/logs" element={<LogsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
